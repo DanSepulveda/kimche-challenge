@@ -1,44 +1,49 @@
 import useTitle from '../hooks/useTitle'
-import H1 from '../components/H1'
-import CardsGrid from '../components/CardsGrid'
-import Button from '../components/Button'
 import { useState } from 'react'
+import H1 from '../components/H1'
+import GroupBy from '../components/GroupBy'
+import NoResults from '../components/NoResults'
+import CardsGrid from '../components/CardsGrid'
 
 const Home = () => {
     useTitle('Countries | Home')
-    const [goupBy, setGoupBy] = useState('continent')
-
+    const [fetched, setFetched] = useState(false)
+    const [countries, setCountries] = useState([])
+    const [groupBy, setGroupBy] = useState('continent')
 
     const inputHandler = (event) => {
         console.log(event.target.value)
     }
 
     const buttonHandler = (label) => {
-        setGoupBy(label)
+        setGroupBy(label)
     }
 
+    // Conditional rendering for GroupBy component
+    const groupByComponent = countries.length ? <GroupBy buttonHandler={buttonHandler} groupBy={groupBy} /> : null
+
+    // Conditional component rendering if there is/is not results
+    const results = countries.length
+        ? <CardsGrid countries={countries} groupBy={groupBy} />
+        : fetched
+            ? <NoResults />
+            : null
+
     return (
-        <div>
+        <div className='flex flex-col items-center'>
             <H1>Country search</H1>
-            <p className='text-center'>
+            <p className='text-center w-1/2 mb-5'>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, tempore! Alias, porro odio! Soluta nam, neque earum, voluptates fugiat veritatis possimus enim sint modi, ipsa ipsam recusandae cumque doloribus qui
             </p>
             <input
                 type='text'
                 name='country'
-                className='w-75'
+                className='w-1/2 mb-10 py-2 px-4'
+                placeholder='Search by country name'
                 onChange={inputHandler}
             />
-            <div className='flex items-center'>
-                <p className='font-medium text-xl mr-10'>Grouped by</p>
-                <Button onClick={() => buttonHandler('continent')} active={goupBy === 'continent'}>
-                    Continent
-                </Button>
-                <Button onClick={() => buttonHandler('language')} active={goupBy === 'language'}>
-                    Language
-                </Button>
-            </div>
-            <CardsGrid />
+            {groupByComponent}
+            {results}
         </div>
     )
 }
