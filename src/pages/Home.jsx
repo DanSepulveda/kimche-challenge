@@ -15,21 +15,16 @@ const Home = () => {
     const { filteredCountries } = useSelector(countryState)
     const { data, error, loading } = useQuery(GET_ALL)
 
-    const [groupBy, setGroupBy] = useState('continent')
-
     useEffect(() => {
         if (!loading && !error) dispatch(setCountries(data.countries))
     }, [loading])
 
-    // Conditional rendering for GroupBy component
-    const groupByComponent = filteredCountries.length
-        ? <GroupBy setGroupBy={setGroupBy} groupBy={groupBy} />
-        : null
+    // Conditional rendering for GroupBy and CardsGrid components
+    const condition = filteredCountries.length
+    const groupByComponent = condition ? <GroupBy /> : null
+    const results = condition ? <CardsGrid /> : <NoResults />
 
-    // Conditional component rendering if there is/is not results
-    const results = filteredCountries.length
-        ? <CardsGrid countries={filteredCountries} groupBy={groupBy} />
-        : <NoResults />
+    if (loading) return
 
     return (
         <div className='flex flex-col items-center w-screen'>
@@ -40,12 +35,15 @@ const Home = () => {
                 </h2>
                 <input
                     type='text'
+                    autoFocus
                     name='country'
                     className='w-1/2 mb-10 py-2 px-4 rounded-full shadow-md outline-none border border-teal-600/30 hover:border-teal-600/60 focus:border-teal-600/75 transition-all'
                     placeholder='Search by country name'
                     onChange={(e) => dispatch(filterCountries(e.target.value))}
                 />
-                {groupByComponent}
+                <div className='h-16'>
+                    {groupByComponent}
+                </div>
             </div>
             {results}
         </div>
