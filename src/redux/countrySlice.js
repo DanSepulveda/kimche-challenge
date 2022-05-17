@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
     countries: [],
-    filteredContries: [],
+    filteredCountries: [],
     fetching: false
 }
 
@@ -10,13 +10,13 @@ export const countrySlice = createSlice({
     'name': 'country',
     initialState,
     reducers: {
-        prueba: (state) => {
-            state.countries = null
+        setCountries: (state, action) => {
+            state.countries = action.payload
         }
     }
 })
 
-export const { } = countrySlice.actions
+export const { setCountries } = countrySlice.actions
 
 export const countryState = (state) => state.country
 

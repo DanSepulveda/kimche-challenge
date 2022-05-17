@@ -1,6 +1,8 @@
-import { useEffect, useState } from 'react'
 import useTitle from '../hooks/useTitle'
-import { useLazyQuery } from '@apollo/client'
+import { useEffect, useState } from 'react'
+import { useQuery } from '@apollo/client'
+import { useDispatch, useSelector } from 'react-redux'
+import { countryState, setCountries } from '../redux/countrySlice'
 import GET_ALL from '../apollo/getAll'
 import H1 from '../components/H1'
 import GroupBy from '../components/GroupBy'
@@ -9,30 +11,28 @@ import CardsGrid from '../components/CardsGrid'
 
 const Home = () => {
     useTitle('Countries | Home')
-    const [getCountries, { loading, data }] = useLazyQuery(GET_ALL)
-    const [groupBy, setGroupBy] = useState('continent')
-    const [countries, setCountries] = useState([])
+    const dispatch = useDispatch()
+    const { filteredCountries } = useSelector(countryState)
+    const { data, error, loading } = useQuery(GET_ALL)
 
-    const getAllCountries = async () => {
-        await getCountries()
-    }
+    const [groupBy, setGroupBy] = useState('continent')
 
     const inputHandler = (event) => {
         console.log(event.target.value)
     }
 
     useEffect(() => {
-        getAllCountries()
-    }, [])
+        if (!loading && !error) dispatch(setCountries(data.countries))
+    }, [loading])
 
     // Conditional rendering for GroupBy component
-    const groupByComponent = countries.length
+    const groupByComponent = filteredCountries.length
         ? <GroupBy setGroupBy={setGroupBy} groupBy={groupBy} />
         : null
 
     // Conditional component rendering if there is/is not results
-    const results = countries.length
-        ? <CardsGrid countries={countries} groupBy={groupBy} />
+    const results = filteredCountries.length
+        ? <CardsGrid countries={filteredCountries} groupBy={groupBy} />
         : <NoResults />
 
     return (
