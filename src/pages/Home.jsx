@@ -1,5 +1,5 @@
 import useTitle from '../hooks/useTitle'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useQuery } from '@apollo/client'
 import { useDispatch, useSelector } from 'react-redux'
 import { countryState, setCountries, filterCountries } from '../redux/countrySlice'
@@ -17,6 +17,7 @@ const Home = () => {
 
     useEffect(() => {
         if (!loading && !error) dispatch(setCountries(data.countries))
+        //eslint-disable-next-line
     }, [loading])
 
     // Conditional rendering for GroupBy and CardsGrid components

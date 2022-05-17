@@ -9,7 +9,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'))
 
 const client = new ApolloClient({
   uri: 'https://countries.trevorblades.com/',
-  cache: new InMemoryCache
+  cache: new InMemoryCache()
 })
 
 root.render(
