@@ -2,7 +2,7 @@ import useTitle from '../hooks/useTitle'
 import { useEffect, useState } from 'react'
 import { useQuery } from '@apollo/client'
 import { useDispatch, useSelector } from 'react-redux'
-import { countryState, setCountries } from '../redux/countrySlice'
+import { countryState, setCountries, filterCountries } from '../redux/countrySlice'
 import GET_ALL from '../apollo/getAll'
 import H1 from '../components/H1'
 import GroupBy from '../components/GroupBy'
@@ -16,10 +16,6 @@ const Home = () => {
     const { data, error, loading } = useQuery(GET_ALL)
 
     const [groupBy, setGroupBy] = useState('continent')
-
-    const inputHandler = (event) => {
-        console.log(event.target.value)
-    }
 
     useEffect(() => {
         if (!loading && !error) dispatch(setCountries(data.countries))
@@ -47,7 +43,7 @@ const Home = () => {
                     name='country'
                     className='w-1/2 mb-10 py-2 px-4 rounded-full shadow-md outline-none border border-teal-600/30 hover:border-teal-600/60 focus:border-teal-600/75 transition-all'
                     placeholder='Search by country name'
-                    onChange={inputHandler}
+                    onChange={(e) => dispatch(filterCountries(e.target.value))}
                 />
                 {groupByComponent}
             </div>

@@ -12,11 +12,15 @@ export const countrySlice = createSlice({
     reducers: {
         setCountries: (state, action) => {
             state.countries = action.payload
+        },
+        filterCountries: (state, action) => {
+            const result = state.countries.filter(country => country.name.toLowerCase().includes(action.payload.toLowerCase()))
+            state.filteredCountries = result
         }
     }
 })
 
-export const { setCountries } = countrySlice.actions
+export const { setCountries, filterCountries } = countrySlice.actions
 
 export const countryState = (state) => state.country
 
