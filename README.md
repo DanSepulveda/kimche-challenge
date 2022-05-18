@@ -1,7 +1,7 @@
 # Desafío para Software Engineers
 
-Nombre postulante: Daniel Sepúlveda Pérez
-Link a la app en producción: [Countries App](https://dansep-kimche.netlify.app/)
+- Nombre postulante: Daniel Sepúlveda Pérez
+- Link a la app en producción: [Countries App](https://dansep-kimche.netlify.app/)
 
 ## Pregunta
 
