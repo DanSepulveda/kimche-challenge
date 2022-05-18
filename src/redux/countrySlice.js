@@ -5,7 +5,7 @@ const initialState = {
     countries: [],
     filteredCountries: [],
     groupBy: 'continent',
-    fetching: false
+    inputEmpty: true
 }
 
 export const countrySlice = createSlice({
@@ -19,6 +19,7 @@ export const countrySlice = createSlice({
             const filtered = filterCountriesByName(state.countries, action.payload)
             const grouped = groupBy(filtered, state.groupBy)
             state.filteredCountries = action.payload === '' ? [] : grouped
+            state.inputEmpty = action.payload === '' ? true : false
         },
         groupHandler: (state, action) => {
             state.groupBy = action.payload
