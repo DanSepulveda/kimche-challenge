@@ -4,10 +4,12 @@ export const filterCountriesByName = (countries, name) => {
 
 const groupByLanguage = (countries) => {
     const groupedCountries = countries.reduce((result, item) => {
-        result[item.languages[0].name] = [...result[item.languages[0].name] || [], item]
+        item.languages.forEach(language => {
+            result[language.name] = [...result[language.name] || [], item]
+        })
         return result
-    })
-    return groupedCountries
+    }, {})
+    return Object.entries(groupedCountries).sort((a, b) => a[0].localeCompare(b[0]))
 }
 
 const groupByContinent = (countries) => {
