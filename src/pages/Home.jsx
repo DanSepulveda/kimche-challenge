@@ -21,9 +21,9 @@ const Home = () => {
     }, [loading])
 
     // Conditional rendering for GroupBy and CardsGrid components
-    const condition = filteredCountries.length
+    const condition = Object.keys(filteredCountries).length
     const groupByComponent = condition ? <GroupBy /> : null
-    const results = condition ? <CardsGrid /> : <NoResults />
+    const results = condition ? <CardsGrid countries={filteredCountries} /> : <NoResults />
 
     if (loading) return
 
