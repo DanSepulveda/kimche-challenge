@@ -16,10 +16,6 @@ const GET_ALL = gql`
               name
             }
             emoji
-            emojiU
-            states{
-              name
-            }
           }
     }
 `
