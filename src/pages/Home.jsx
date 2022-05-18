@@ -21,14 +21,14 @@ const Home = () => {
     }, [loading])
 
     // Conditional rendering for GroupBy and CardsGrid components
-    const condition = Object.keys(filteredCountries).length
+    const condition = filteredCountries.length
     const groupByComponent = condition ? <GroupBy /> : null
     const results = condition ? <CardsGrid countries={filteredCountries} /> : <NoResults />
 
     if (loading) return
 
     return (
-        <div className='flex flex-col items-center w-screen'>
+        <div className='flex flex-col items-center min-h-screen'>
             <div className='flex flex-col items-center bg-gray-800 py-7 w-full'>
                 <H1>Country search</H1>
                 <h2 className='text-center w-1/2 mb-10 text-gray-300/90 text-lg'>
