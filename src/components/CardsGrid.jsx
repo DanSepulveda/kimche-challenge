@@ -1,8 +1,10 @@
-import React from 'react'
+import CountriesSection from './CountriesSection'
 
-const CardsGrid = () => {
+const CardsGrid = ({ countries }) => {
     return (
-        <div>CardsGrid</div>
+        <div className='bg-red-800 w-full grow'>
+            {countries.map(group => <CountriesSection gruop={group} key={group[0]} />)}
+        </div>
     )
 }
 
