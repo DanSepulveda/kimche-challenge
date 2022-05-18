@@ -16,7 +16,7 @@ const groupByContinent = (countries) => {
         return result
     }, {})
 
-    return Object.entries(groupedCountries)
+    return Object.entries(groupedCountries).sort((a, b) => a[0].localeCompare(b[0]))
 }
 
 export const groupBy = (countries, condition) => {
