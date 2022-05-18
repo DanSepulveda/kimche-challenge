@@ -4,7 +4,7 @@ import getLangList from '../utils/getLangList'
 import Detail from './Detail'
 
 const CountryCard = ({ country }) => {
-    const { name, capital, code, continent, currency, emoji, languages, native } = country
+    const { name, capital, code, continent, currency, emoji, languages, native, phone } = country
     const { groupBy } = useSelector(countryState)
 
     return (
@@ -15,6 +15,7 @@ const CountryCard = ({ country }) => {
             <Detail title='Capital' content={capital} />
             <Detail title='Currency' content={currency} />
             <Detail title='Code' content={code} />
+            <Detail title='Phone code' content={phone} />
             {groupBy !== 'continent' && <Detail title='Continent' content={continent.name} />}
             {groupBy === 'continent' && <Detail title='Languages' content={getLangList(languages)} />}
         </div>
