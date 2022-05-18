@@ -15,7 +15,8 @@ const groupByContinent = (countries) => {
         result[item.continent.name] = [...result[item.continent.name] || [], item]
         return result
     }, {})
-    return groupedCountries
+
+    return Object.entries(groupedCountries)
 }
 
 export const groupBy = (countries, condition) => {
