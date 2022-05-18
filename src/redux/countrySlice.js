@@ -4,6 +4,7 @@ import { filterCountriesByName, groupBy } from '../utils/groupCountries'
 const initialState = {
     countries: [],
     filteredCountries: [],
+    groupedCountries: {},
     groupBy: 'continent',
     inputEmpty: true
 }
@@ -18,12 +19,13 @@ export const countrySlice = createSlice({
         filterCountries: (state, action) => {
             const filtered = filterCountriesByName(state.countries, action.payload)
             const grouped = groupBy(filtered, state.groupBy)
-            state.filteredCountries = action.payload === '' ? [] : grouped
-            state.inputEmpty = action.payload === '' ? true : false
+            state.filteredCountries = action.payload === '' ? [] : filtered
+            state.groupedCountries = action.payload === '' ? [] : grouped
+            state.inputEmpty = action.payload === ''
         },
         groupHandler: (state, action) => {
             state.groupBy = action.payload
-            state.filteredCountries = groupBy(state.filteredCountries, state.groupBy)
+            state.groupedCountries = groupBy(state.filteredCountries, state.groupBy)
         }
     }
 })
