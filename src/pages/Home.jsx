@@ -4,7 +4,6 @@ import { useQuery } from '@apollo/client'
 import { useDispatch, useSelector } from 'react-redux'
 import { countryState, setCountries, filterCountries } from '../redux/countrySlice'
 import GET_ALL from '../apollo/getAll'
-import H1 from '../components/H1'
 import GroupBy from '../components/GroupBy'
 import NoResults from '../components/NoResults'
 import CardsGrid from '../components/CardsGrid'
@@ -30,7 +29,9 @@ const Home = () => {
     return (
         <div className='flex flex-col items-center min-h-screen'>
             <div className='flex flex-col items-center bg-gray-800 py-7 w-full'>
-                <H1>Country search</H1>
+                <h1 className='text-center text-6xl text-teal-300/80 font-bold mb-7'>
+                    Country Search
+                </h1>
                 <h2 className='text-center w-1/2 mb-10 text-gray-300/90 text-lg'>
                     Get some basic information about any country
                 </h2>
