@@ -1,10 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { filterCountriesByName, groupBy } from '../utils/groupCountries'
 
 const initialState = {
     countries: [],
     filteredCountries: [],
-    fetching: false,
-    groupBy: 'continent'
+    groupBy: 'continent',
+    fetching: false
 }
 
 export const countrySlice = createSlice({
@@ -15,11 +16,13 @@ export const countrySlice = createSlice({
             state.countries = action.payload
         },
         filterCountries: (state, action) => {
-            const result = state.countries.filter(country => country.name.toLowerCase().includes(action.payload.toLowerCase()))
-            state.filteredCountries = action.payload === '' ? [] : result
+            const filtered = filterCountriesByName(state.countries, action.payload)
+            const grouped = groupBy(filtered, state.groupBy)
+            state.filteredCountries = action.payload === '' ? [] : grouped
         },
         groupHandler: (state, action) => {
             state.groupBy = action.payload
+            state.filteredCountries = groupBy(state.filteredCountries, state.groupBy)
         }
     }
 })
