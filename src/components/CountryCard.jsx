@@ -1,10 +1,10 @@
-import Detail from './Detail'
 import { useSelector } from 'react-redux'
 import { countryState } from '../redux/countrySlice'
 import getLangList from '../utils/getLangList'
+import Detail from './Detail'
 
 const CountryCard = ({ country }) => {
-    const { name, capital, code, continent, currency, emoji, emojiU, languages, native } = country
+    const { name, capital, code, continent, currency, emoji, languages, native } = country
     const { groupBy } = useSelector(countryState)
 
     return (
