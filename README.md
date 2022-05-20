@@ -3,6 +3,9 @@
 - Nombre postulante: Daniel Sepúlveda Pérez
 - Link a la app en producción: [Countries App](https://dansep-kimche.netlify.app/)
 
+- Video explicativo: [Video](https://www.loom.com/share/5a91192d361a4f11a756f71eb65a72fc)
+- Motivación por el cargo : [Video](https://www.youtube.com/watch?v=eRN6VPbigsU)
+
 ## Pregunta
 
 La tabla que contiene la información correspondiente a la asistencia diaria de un niño en un colegio tiene 90 millones de filas. Todas las tablas del sistema existen en la misma BDD en MySQL. La lógica del backend que actualiza la información correspondiente al pasar la asistencia tiene un tiempo de servicio p95 de 10 segundos. El equipo está interesado en bajar este tiempo para mejorar la experiencia del usuario (y porque nos gusta pensar en Kimche como un Ferrari). ¿Qué propondrías para enfrentar el problema? Esta pregunta es abierta, no hay respuestas malas. Puedes proponer arquitectura, tecnologías, diseño, etc.
